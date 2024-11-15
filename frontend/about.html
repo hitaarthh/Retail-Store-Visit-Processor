@@ -7,7 +7,62 @@
     <title>About - Store Management Processor</title>
     <!-- Use the same styles as your main page -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* About Page Specific Overrides */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Keep 2 cards per row */
+    gap: 2rem;
+    margin-bottom: 2rem; /* Reduced from 3rem */
+}
 
+.tech-stack {
+    text-align: center;
+    margin: 3rem 0;  /* Adjusted margin */
+}
+
+.tech-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;  /* Adjusted margin */
+}
+
+.feature-card h3 {
+    color: #3498db;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.tech-icon {
+    background: white;
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Additional styles for better spacing */
+.doc-section {
+    margin-bottom: 2rem;  /* Reduced from 3rem */
+}
+
+.doc-section > h1 {
+    margin-bottom: 1rem;  /* Reduced from 2rem */
+}
+
+.doc-section > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Make sure "How It Works" card spans full width */
+.feature-card[style*="margin-top: 2rem"] {
+    grid-column: 1 / -1;  /* Span all columns */
+    margin-top: 1rem !important;  /* Reduced margin */
+}
+    </style>
 </head>
 
 <body>
@@ -86,6 +141,7 @@
                 <li>Track job status in real-time</li>
             </ol>
         </div>
+        
     </div>
     </div>
     </div>

@@ -25,6 +25,17 @@
         <div class="doc-section">
             <h1>Store Management Processor System</h1>
             
+            <div class="info-box">
+                <h3>Important Notes:</h3>
+                <ul>
+                    <li><strong>Store IDs:</strong> Must exist in <a href="https://drive.google.com/file/d/1dCdAFEBzN1LVUUKxIZyewOeYx42PtEzb/view" target="_blank">Store Master Data</a> (format: RP0000X)</li>
+                    <li><strong>Required Fields:</strong> Each visit needs valid store_id, image_url array, and visit_time</li>
+                    <li><strong>Image Requirements:</strong> URLs must be accessible and in JPEG/PNG format</li>
+                    <li><strong>Time Format:</strong> Visit time should be in RFC3339 (e.g., 2024-03-15T10:00:00Z)</li>
+                    <li><strong>Validation:</strong> System validates store IDs before creating jobs</li>
+                    <li><strong>Processing:</strong> Includes perimeter calculation with simulated GPU processing (0.1-0.4s delay)</li>
+                </ul>
+            </div>
             <div id="json-section" class="section">
                 <h2>Submit Store Visit Job</h2>
                 <div>

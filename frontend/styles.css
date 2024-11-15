@@ -363,35 +363,126 @@ h3 {
     margin-bottom: 40px;
 }
 
+/* Section Headers */
 .section-title {
-    color: #2c3e50;
-    margin: 2rem 0 1rem;
+    color: #37474F;
+    font-size: 1.8rem;
+    margin: 2.5rem 0 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #3498db;
 }
 
+/* Grid Layout */
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+    gap: 2rem;
+    margin-bottom: 3rem;
 }
 
+/* Feature Cards */
 .feature-card {
     background: white;
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+/* Card Headers */
+.feature-card h3 {
+    color: #3498db;  /* Blue headers */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+/* Card Description */
+.feature-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* List Styling */
+.feature-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-card ul li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.feature-card ul li:before {
+    content: "•";
+    color: #3498db;
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .about-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    }
 }
 
 @media (max-width: 768px) {
     .about-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* One card per row */
     }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+}
+
+
+.info-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+}
+
+.info-box h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-box ul li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.info-box ul li:before {
+    content: "•";
+    color: #3498db;
+    position: absolute;
+    left: 0;
+}
+
+.info-box a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.info-box a:hover {
+    text-decoration: underline;
+}
+
+.info-box strong {
+    color: #2c3e50;
 }

@@ -267,7 +267,7 @@ func enableCors(w http.ResponseWriter) {
 func handleSubmitJob(w http.ResponseWriter, r *http.Request) {
 	enableCors(w)
 	if r.Method == http.MethodOptions {
-		return // Handle preflight request and return
+		return
 	}
 
 	if r.Method != http.MethodPost {
@@ -295,13 +295,23 @@ func handleSubmitJob(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Validate each visit field
+	// Validate each visit field AND store IDs before creating job
 	for i, visit := range jobReq.Visits {
 		if visit.StoreID == "" {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(map[string]string{
 				"error": fmt.Sprintf("Missing 'store_id' in visit at index %d.", i),
+			})
+			return
+		}
+
+		// Validate store ID exists in store master
+		if !jobManager.ValidateStore(visit.StoreID) {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]string{
+				"error": fmt.Sprintf("Invalid store_id: %s. Store does not exist in store master data.", visit.StoreID),
 			})
 			return
 		}
@@ -335,11 +345,10 @@ func handleSubmitJob(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create a new job and start processing
+	// Create job only if all validations pass
 	jobID := jobManager.CreateJob()
 	go jobManager.ProcessJob(jobID, jobReq.Visits)
 
-	// Send the job ID as response
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(map[string]string{
