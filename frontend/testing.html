@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Testing Guide - Store Management Processor System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .code-block {
+            white-space: pre;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #3498db;
+            overflow-x: auto;
+        }
+
+        .json-key {
+            color: #2c3e50;
+            /* Dark blue matching the theme */
+            font-weight: bold;
+        }
+
+        .json-value {
+            color: #3498db;
+            /* Primary blue from theme */
+        }
+
+        .json-string {
+            color: #27ae60;
+            /* Green that complements the theme */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="docker.html">Docker Setup</a></li>
+            <li><a href="testing.html">Testing Guide</a></li>
+            <li><a href="flyio.html">Fly.io Deployment</a></li>
+            <li><a href="future.html">Future Improvements</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="doc-section">
+            <h1>Testing Guide</h1>
+            <p class="description">Sample test cases and expected responses for the Store Management Processor System</p>
+
+            <div class="section">
+                <h2>1. Valid Request with Existing Store IDs</h2>
+                <p>Testing with valid store_ids that exist in the CSV file</p>
+
+                <h3>Request Payload:</h3>
+                <div class="code-block">
+                    {
+                    "count": 2,
+                    "visits": [
+                    {
+                    "store_id": "RP00001",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/2.jpg",
+                    "https://www.gstatic.com/webp/gallery/3.jpg"
+                    ],
+                    "visit_time": "2024-03-15T10:00:00Z"
+                    },
+                    {
+                    "store_id": "RP00002",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/4.jpg"
+                    ],
+                    "visit_time": "2024-03-15T11:00:00Z"
+                    }
+                    ]
+                    }</div>
+
+                <h3>Expected Response for Successful Job Creation:</h3>
+                <div class="code-block">
+                    {
+                    "job_id": "1"
+                    }</div>
+
+                <h3>Expected Response for Job Status (After Completion):</h3>
+                <div class="code-block">
+                    {
+                    "status": "completed",
+                    "job_id": "1"
+                    }</div>
+            </div>
+
+            <!-- Rest of the test cases with same formatting -->
+            <div class="section">
+                <h2>2. Invalid Request with Non-Existent Store IDs</h2>
+                <p>Testing with store_ids that don't exist in the CSV file</p>
+
+                <h3>Request Payload:</h3>
+                <div class="code-block">
+                    {
+                    "count": 2,
+                    "visits": [
+                    {
+                    "store_id": "RP99999",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/2.jpg",
+                    "https://www.gstatic.com/webp/gallery/3.jpg"
+                    ],
+                    "visit_time": "2024-03-15T10:00:00Z"
+                    },
+                    {
+                    "store_id": "RP00002",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/4.jpg"
+                    ],
+                    "visit_time": "2024-03-15T11:00:00Z"
+                    }
+                    ]
+                    }</div>
+
+                <h3>Expected Response for Job Status (Failure due to Invalid Store ID):</h3>
+                <div class="code-block">
+                    {
+                    "status": "failed",
+                    "job_id": "2",
+                    "error": [
+                    {
+                    "store_id": "RP99999",
+                    "error": "Store ID RP99999 does not exist in the store master data."
+                    }
+                    ]
+                    }</div>
+            </div>
+
+            <div class="section">
+                <h2>3. Partially Valid Request with Some Invalid Store IDs</h2>
+                <p>Testing with a mix of valid and invalid store_ids</p>
+
+                <h3>Request Payload:</h3>
+                <div class="code-block">
+                    {
+                    "count": 2,
+                    "visits": [
+                    {
+                    "store_id": "RP00001",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/5.jpg"
+                    ],
+                    "visit_time": "2024-03-15T09:00:00Z"
+                    },
+                    {
+                    "store_id": "RP88888",
+                    "image_url": [
+                    "https://www.gstatic.com/webp/gallery/6.jpg"
+                    ],
+                    "visit_time": "2024-03-15T12:00:00Z"
+                    }
+                    ]
+                    }</div>
+
+                <h3>Expected Response for Job Status (Failure with Specific Invalid Store ID):</h3>
+                <div class="code-block">
+                    {
+                    "status": "failed",
+                    "job_id": "3",
+                    "error": [
+                    {
+                    "store_id": "RP88888",
+                    "error": "Store ID RP88888 does not exist in the store master data."
+                    }
+                    ]
+                    }</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>Store Management Processor System for Retail Management. Process store visits, validate store data, and
+                    handle visit images at scale.</p>
+                <div class="social-links">
+                    <a href="https://github.com/hitaarthh/store-management-processor.git" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/hitaarthh" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/hitarth-rohra/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://fly.io/" target="_blank">Flyio Support</a></li>
+                    <li><a href="https://drive.google.com/file/d/1dCdAFEBzN1LVUUKxIZyewOeYx42PtEzb/view" target="_blank">Store Master Data</a></li>
+                    <li><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></li>
+                    <li><a href="future.html" target="_blank">Future Improvements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: <a href="mailto:hitarth.rohra@mail.com">hitarth.rohra@mail.com</a></li>
+                    <li>Website: <a href="https://hitaarthh.github.io/" target="_blank">hitaarthh.github.io</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Store Management Processor System. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        Object.prototype.prettyPrint = function() {
+            var jsonLine = /^( *)("[\w]+": )?([\d.+-]*|"[^"]*"|true|false|null)?([,[{])?$/mg;
+            var replacer = function(match, pIndent, pKey, pVal, pEnd) {
+                var key = '<span class="json-key">',
+                    val = '<span class="json-value">',
+                    str = '<span class="json-string">',
+                    num = '<span class="json-number">',
+                    r = pIndent || '';
+                if (pKey)
+                    r = r + key + pKey + '</span>';
+                if (pVal) {
+                    if (pVal === 'true' || pVal === 'false' || pVal === 'null')
+                        r = r + val + pVal + '</span>';
+                    else if (!isNaN(pVal))
+                        r = r + num + pVal + '</span>';
+                    else
+                        r = r + str + pVal + '</span>';
+                }
+                return r + (pEnd || '');
+            };
+            return JSON.stringify(this, null, 4)
+                       .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+                       .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                       .replace(jsonLine, replacer);
+        }
+
+        window.onload = function() {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                try {
+                    const content = JSON.parse(block.textContent);
+                    block.innerHTML = content.prettyPrint();
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

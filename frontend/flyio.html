@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fly.io Deployment - Store Management Processor System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="docker.html">Docker Setup</a></li>
+            <li><a href="testing.html">Testing Guide</a></li>
+            <li><a href="flyio.html">Fly.io Deployment</a></li>
+            <li><a href="future.html">Future Improvements</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="doc-section">
+            <h1>Fly.io Deployment</h1>
+            <p class="description">Deploy your Store Management Processor System to production with Fly.io.</p>
+            <div class="section">
+                <h2>What is Fly.io?</h2>
+                <p>Fly.io is a platform that lets you deploy applications globally by running containers close to your users. It transforms Docker containers into micro-VMs that can run anywhere in the world. Key benefits include:</p>
+                <ul>
+                    <li>Global deployment with automatic region selection</li>
+                    <li>Built-in load balancing and SSL</li>
+                    <li>Pay-per-use pricing model</li>
+                    <li>Simple deployment process with minimal configuration</li>
+                    <li>Support for multiple programming languages and frameworks</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Essential Commands</h2>
+                <div class="requirement">
+                    <h3>Authentication</h3>
+                    <div class="code-block">
+                        flyctl auth login
+                    </div>
+                </div>
+
+                <div class="requirement">
+                    <h3>Launch Application</h3>
+                    <div class="code-block">
+                        flyctl launch --name store-management-processor --region bom
+                    </div>
+                </div>
+
+                <div class="requirement">
+                    <h3>List Applications</h3>
+                    <div class="code-block">
+                        flyctl apps list
+                    </div>
+                </div>
+
+                <div class="requirement">
+                    <h3>Check Application Status</h3>
+                    <div class="code-block">
+                        flyctl status -a store-management-processor
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Deployment Actions</h2>
+                <div class="requirement">
+                    <h3>Deploy Updates</h3>
+                    <div class="code-block">
+                        flyctl deploy
+                    </div>
+                </div>
+
+                <div class="requirement">
+                    <h3>View Logs</h3>
+                    <div class="code-block">
+                        flyctl logs -a store-management-processor
+                    </div>
+                </div>
+
+                <div class="requirement">
+                    <h3>Destroy Application</h3>
+                    <div class="code-block">
+                        flyctl apps destroy store-management-processor
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>Store Management Processor System for Retail Management. Process store visits, validate store data, and
+                    handle visit images at scale.</p>
+                <div class="social-links">
+                    <a href="https://github.com/hitaarthh/store-management-processor.git" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/hitaarthh" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/hitarth-rohra/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://fly.io/" target="_blank">Flyio Support</a></li>
+                    <li><a href="https://drive.google.com/file/d/1dCdAFEBzN1LVUUKxIZyewOeYx42PtEzb/view" target="_blank">Store Master Data</a></li>
+                    <li><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></li>
+                    <li><a href="future.html" target="_blank">Future Improvements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: <a href="mailto:hitarth.rohra@mail.com">hitarth.rohra@mail.com</a></li>
+                    <li>Website: <a href="https://hitaarthh.github.io/" target="_blank">hitaarthh.github.io</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Store Management Processor System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

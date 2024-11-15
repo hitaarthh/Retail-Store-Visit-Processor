@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Setup - Store Management Processor System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="docker.html">Docker Setup</a></li>
+            <li><a href="testing.html">Testing Guide</a></li>
+            <li><a href="flyio.html">Fly.io Deployment</a></li>
+            <li><a href="future.html">Future Improvements</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="doc-section">
+            <h1>Docker Setup</h1>
+            <p class="description">Quick guide to run the application using Docker</p>
+
+            <div class="section">
+                <h2>Prerequisites</h2>
+                <div class="requirement">
+                    <h3>Docker Desktop: Latest version installed</h3>
+                    <div class="code-block">
+                        docker --version
+                    </div>
+                </div>
+                
+                <div class="requirement">
+                    <h3>Git: For cloning the repository</h3>
+                    <div class="code-block">
+                        git clone https://github.com/hitaarthh/store-management-processor.git
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Build Container</h2>
+                <p>Create a Docker image from the source code</p>
+                <div class="code-block">
+                    docker build -t store-management-processor .
+                </div>
+                <p class="note">Note: Make sure you're in the project root directory</p>
+            </div>
+
+            <div class="section">
+                <h2>Run Container</h2>
+                <p>Start the containerized application</p>
+                <div class="code-block">
+                    docker run -p 8081:8081 store-management-processor
+                </div>
+                <p>The application will be available at: http://localhost:8081</p>
+            </div>
+
+            <div class="section">
+                <h2>Additional Commands</h2>
+                
+                <h3>Stop Container</h3>
+                <div class="code-block">
+                    docker stop $(docker ps -q --filter ancestor=store-management-processor)
+                </div>
+
+                <h3>View Logs</h3>
+                <div class="code-block">
+                    docker logs -f store-management-processor
+                </div>
+
+                <h3>Remove Container</h3>
+                <div class="code-block">
+                    docker rm store-management-processor
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>Store Management Processor System for Retail Management. Process store visits, validate store data, and
+                    handle visit images at scale.</p>
+                <div class="social-links">
+                    <a href="https://github.com/hitaarthh/store-management-processor.git" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/hitaarthh" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/hitarth-rohra/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://fly.io/" target="_blank">Flyio Support</a></li>
+                    <li><a href="https://drive.google.com/file/d/1dCdAFEBzN1LVUUKxIZyewOeYx42PtEzb/view" target="_blank">Store Master Data</a></li>
+                    <li><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></li>
+                    <li><a href="future.html" target="_blank">Future Improvements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: <a href="mailto:hitarth.rohra@mail.com">hitarth.rohra@mail.com</a></li>
+                    <li>Website: <a href="https://hitaarthh.github.io/" target="_blank">hitaarthh.github.io</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Store Management Processor System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

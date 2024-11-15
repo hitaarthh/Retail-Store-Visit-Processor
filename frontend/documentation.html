@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Store Management Processor System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="docker.html">Docker Setup</a></li>
+            <li><a href="testing.html">Testing Guide</a></li>
+            <li><a href="flyio.html">Fly.io Deployment</a></li>
+            <li><a href="future.html">Future Improvements</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="doc-section">
+            <h1>API Documentation</h1>
+            <p class="description">A comprehensive guide to using the Retail Store Visit Processor</p>
+
+            <div class="section">
+                <h2>Overview</h2>
+                <p>This service processes store visit images in bulk, calculating image perimeters and validating store information.</p>
+                <ul>
+                    <li>Handles multiple concurrent jobs</li>
+                    <li>Processes thousands of images per job</li>
+                    <li>Validates store information against master data</li>
+                    <li>Provides real-time job status updates</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Base URL</h2>
+                <p>All URLs referenced in the documentation have the following base:</p>
+                <div class="code-block">http://localhost:8081</div>
+            </div>
+
+            <div class="section">
+                <h2>Submit Job</h2>
+                <p>Create a new job.</p>
+                
+                <h3>Endpoint</h3>
+                <div class="code-block">POST /api/submit</div>
+
+                <h3>Request Format</h3>
+                <div class="code-block">
+{
+    "count": 2,
+    "visits": [
+        {
+            "store_id": "RP00001",
+            "image_url": [
+                "https://example.com/image1.jpg",
+                "https://example.com/image2.jpg"
+            ],
+            "visit_time": "2024-03-15T10:00:00Z"
+        }
+    ]
+}
+                </div>
+
+                <h3>Fields</h3>
+                <ul>
+                    <li><strong>count</strong> (required): Number of store visits</li>
+                    <li><strong>visits</strong> (required): Array of store visits
+                        <ul>
+                            <li><strong>store_id</strong>: Valid store ID from Store Master</li>
+                            <li><strong>image_url</strong>: Array of image URLs</li>
+                            <li><strong>visit_time</strong>: Visit timestamp (RFC3339 format)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Success Response</h3>
+                <p>Code: 201 CREATED</p>
+                <div class="code-block">
+{
+    "job_id": 123
+}
+                </div>
+
+                <h3>Error Response</h3>
+                <p>Code: 400 BAD REQUEST</p>
+                <div class="code-block">
+{
+    "error": ""
+}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Check Job Status</h2>
+                <p>Get the current status of a processing job.</p>
+
+                <h3>Endpoint</h3>
+                <div class="code-block">GET /api/status?jobid={job_id}</div>
+
+                <h3>Parameters</h3>
+                <ul>
+                    <li><strong>jobid</strong> (required): Job ID received from submit endpoint</li>
+                </ul>
+
+                <h3>Success Response</h3>
+                <p>Code: 200 OK</p>
+                <p>For completed jobs:</p>
+                <div class="code-block">
+{
+    "status": "completed",
+    "job_id": ""
+}
+                </div>
+
+                <p>For failed jobs:</p>
+                <div class="code-block">
+{
+    "status": "failed",
+    "job_id": "",
+    "error": [{
+        "store_id": "RP00001",
+        "error": ""
+    }]
+}
+                </div>
+
+                <h3>Error Response</h3>
+                <p>Code: 400 BAD REQUEST</p>
+                <div class="code-block">
+{}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Setup Instructions</h2>
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Go 1.19 or higher</li>
+                    <li>Git</li>
+                </ul>
+
+                <h3>Installation</h3>
+                <ol>
+                    <li>Clone the repository:
+                        <div class="code-block">git clone https://github.com/hitaarthh/store-management-processor</div>
+                    </li>
+                    <li>Navigate to project directory:
+                        <div class="code-block">cd store-management-processor</div>
+                    </li>
+                    <li>Install dependencies:
+                        <div class="code-block">go mod download</div>
+                    </li>
+                    <li>Run the server:
+                        <div class="code-block">go run main.go</div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>Development Environment</h2>
+                <ul>
+                    <li>Operating System: macOS/Linux/Windows</li>
+                    <li>Editor: VSCode with Go extension</li>
+                    <li>Version Control: Git</li>
+                    <li>API Testing: Insomnia/Postman</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>Store Management Processor System for Retail Management. Process store visits, validate store data, and
+                    handle visit images at scale.</p>
+                <div class="social-links">
+                    <a href="https://github.com/hitaarthh/store-management-processor.git" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/hitaarthh" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/hitarth-rohra/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://fly.io/" target="_blank">Flyio Support</a></li>
+                    <li><a href="https://drive.google.com/file/d/1dCdAFEBzN1LVUUKxIZyewOeYx42PtEzb/view" target="_blank">Store Master Data</a></li>
+                    <li><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></li>
+                    <li><a href="future.html" target="_blank">Future Improvements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: <a href="mailto:hitarth.rohra@mail.com">hitarth.rohra@mail.com</a></li>
+                    <li>Website: <a href="https://hitaarthh.github.io/" target="_blank">hitaarthh.github.io</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Store Management Processor System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
