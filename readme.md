@@ -10,7 +10,7 @@ Retail Pulse requires a system to handle and process large volumes of images col
    - Accepts multiple concurrent jobs, each containing numerous images.
    - Jobs may take from a few minutes to an hour to complete.
   
-[![Store Management Processor](https://github.com/user-attachments/assets/836bd2ea-a8f9-4e61-847b-542a91746e6e)](https://store-management-processor.fly.dev/)
+![Store Management Processor](https://github.com/user-attachments/assets/59d972f3-d30b-4f3a-beef-114acdb5ba32)
 
 2. **Processing Images**:
    - Downloads each image and calculates its perimeter using the formula `2 * (Height + Width)`.
